@@ -5,7 +5,7 @@ const { v4 } = require("uuid");
 const AWS = require("aws-sdk");
 const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
 
-const createUser = async (req, res) => {
+const createClient = async (req, res) => {
   const { name, phone, address } = req.body;
   if (typeof name !== "string") {
     res.status(400).json({ error: '"name" must be a string' });
@@ -33,4 +33,4 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = createUser;
+module.exports = createClient;

@@ -7,7 +7,7 @@ const getClient = async function (req, res) {
   const params = {
     TableName: CLIENTS_TABLE,
     Key: {
-      userId: req.params.userId,
+      userId: req.params.clientId,
     },
   };
 
