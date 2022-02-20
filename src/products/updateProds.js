@@ -8,7 +8,7 @@ const updateProduct = async function (req, res) {
   const params = {
     TableName: PRODUCTS_TABLE,
     Key: {
-      productId: req.params.productId,
+      productId: req.params.prodId,
     },
     UpdateExpression: "set price = :price",
     ExpressionAttributeValues: {
@@ -18,15 +18,11 @@ const updateProduct = async function (req, res) {
   };
 
   try {
-    const { Item } = await dynamoDbClient.update(params).promise();
-    if (Item) {
-      res.json({
-        ok: true,
-        msg: "Product updated",
-      });
-    } else {
-      res.status(404).json({ error: "No se pudo actualizar el producto" });
-    }
+    await dynamoDbClient.update(params).promise();
+    res.json({
+      ok: true,
+      msg: "Product updated",
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Ocurre un problema en el servidor" });
